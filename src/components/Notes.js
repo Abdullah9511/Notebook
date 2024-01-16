@@ -79,6 +79,7 @@ const Notes = () => {
                     value={note.editTitle}
                     aria-describedby="emailHelp"
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -92,6 +93,7 @@ const Notes = () => {
                     name="editDescription"
                     value={note.editDescription}
                     onChange={onChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -105,6 +107,7 @@ const Notes = () => {
                     name="editTag"
                     value={note.editTag}
                     onChange={onChange}
+                    required
                   />
                 </div>
               </form>
@@ -118,7 +121,7 @@ const Notes = () => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary" onClick={clickHandler}>
+              <button disabled= {note.editTitle.length < 5 || note.editDescription.length < 5} type="button" className="btn btn-primary" onClick={clickHandler}>
                 Update Note
               </button>
             </div>
@@ -128,6 +131,9 @@ const Notes = () => {
 
       <div className="row my-3">
         <h2>Your Notes</h2>
+        <div className="container">
+        {notes.length===0 && "No Notes to display"}
+        </div>
         {notes.map((note) => {
           return (
             <Noteitem key={note._id} note={note} updateNote={updateNote} />
